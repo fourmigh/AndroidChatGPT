@@ -5,10 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
+import android.widget.Button
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import org.caojun.chatgpt.R
 import org.caojun.library.bean.chatgpt.CompletionRes
+import org.caojun.library.clipboard.ClipboardUtils
 import java.text.SimpleDateFormat
 
 class DemoAdapter(private val context: Context) : BaseAdapter() {
@@ -44,6 +46,9 @@ class DemoAdapter(private val context: Context) : BaseAdapter() {
 
         holder.tvTitle.hint = sdf.format(item.created * 1000)
         holder.tvAnswer.setText("${item.question}${item.choices[0].text}")
+        holder.btnCopy.setOnClickListener {
+            ClipboardUtils.copy(context, holder.tvAnswer.text.toString(), holder.tvAnswer.text.toString())
+        }
 
         return convertView!!
     }
@@ -51,6 +56,7 @@ class DemoAdapter(private val context: Context) : BaseAdapter() {
     private inner class ViewHolder(root: View) {
         val tvTitle = root.findViewById<TextInputLayout>(R.id.tvTitle)
         val tvAnswer = root.findViewById<TextInputEditText>(R.id.tvAnswer)
+        val btnCopy = root.findViewById<Button>(R.id.btnCopy)
     }
 
     fun addData(completionRes: CompletionRes, question: String) {

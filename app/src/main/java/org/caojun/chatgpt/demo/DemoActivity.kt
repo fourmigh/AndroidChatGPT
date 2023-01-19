@@ -48,6 +48,8 @@ class DemoActivity : AppCompatActivity() {
 
     private fun setButton(enable: Boolean) {
         binding.btnAsk.isEnabled = enable
+        binding.etAuthToken.isEnabled = enable
+        binding.etQuestion.isEnabled = enable
     }
 
     private fun ask() {
@@ -64,10 +66,12 @@ class DemoActivity : AppCompatActivity() {
                 if (response.isSuccessful) {
                     val body = response.body() ?: return
 
-                    adapter.addData(body, question)
-
-                    setButton(true)
+                    if (body.error == null) {
+                        adapter.addData(body, question)
+                    }
                 }
+
+                setButton(true)
             }
 
             override fun onFailure(call: Call<CompletionRes>, t: Throwable) {

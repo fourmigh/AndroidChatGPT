@@ -22,11 +22,22 @@ class CompletionRes {
      * }
      */
 
+    /**
+     * "error": {
+     *      "message": "Incorrect API key provided: sk-PhwL5***************************************fbZM. You can find your API key at https://beta.openai.com.",
+     *      "type": "invalid_request_error",
+     *      "param": null,
+     *      "code": "invalid_api_key"
+     * }
+     */
+
     val id = ""
     val created = 0L
     val model = ""
     val choices = ArrayList<Choice>()
     val usage = Usage()
+
+    var error: Error? = null
 
     var question = ""
 }

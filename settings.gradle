@@ -16,3 +16,4 @@ rootProject.name = "AndroidChatGPT"
 include ':app'
 include ':bean'
 include ':net'
+include ':clipboard'

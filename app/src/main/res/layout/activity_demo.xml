@@ -27,7 +27,7 @@
         android:layout_height="match_parent">
 
         <com.google.android.material.textfield.TextInputLayout
-            android:hint="AuthToken"
+            android:hint="@string/secret_key"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -39,7 +39,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:hint="Question"
+            android:hint="@string/question"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -51,13 +51,14 @@
 
         <ListView
             android:id="@+id/listView"
+            android:divider="@null"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"/>
 
         <Button
             android:id="@+id/btnAsk"
-            android:text="Ask"
+            android:text="@string/ask"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 

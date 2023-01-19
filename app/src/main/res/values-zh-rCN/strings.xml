@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- ChatGPT -->
+    <string name="secret_key">密钥</string>
+    <string name="question">问题</string>
+    <string name="ask">提问</string>
+    <string name="copy">复制</string>
+</resources>
