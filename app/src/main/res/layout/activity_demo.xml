@@ -33,7 +33,6 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etAuthToken"
-                android:text="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"
                 android:inputType="textPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
