@@ -5,11 +5,11 @@ plugins {
 
 android {
     namespace 'org.caojun.library.clipboard'
-    compileSdk 32
+    compileSdk rootProject.ext.sdk_version
 
     defaultConfig {
         minSdk 21
-        targetSdk 32
+        targetSdk rootProject.ext.sdk_version
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"

@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace 'org.caojun.library.net'
+    namespace 'org.caojun.library.datastore'
     compileSdk rootProject.ext.sdk_version
 
     defaultConfig {
@@ -32,7 +32,11 @@ android {
 
 dependencies {
 
-    api 'com.squareup.retrofit2:retrofit:2.9.0'
-    api 'com.squareup.retrofit2:converter-gson:2.9.0'
-//    api 'com.squareup.okhttp3:logging-interceptor:4.9.0'
+    api 'androidx.lifecycle:lifecycle-runtime-ktx:2.5.1'
+    api "androidx.appcompat:appcompat:$appcompat_version"
+
+    //Preferences
+    api 'androidx.datastore:datastore-preferences:1.0.0'
+    //Proto
+//    api 'androidx.datastore:datastore:1.0.0'
 }

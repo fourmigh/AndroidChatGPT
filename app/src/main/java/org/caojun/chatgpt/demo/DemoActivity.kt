@@ -3,17 +3,22 @@ package org.caojun.chatgpt.demo
 import android.os.Bundle
 import android.text.TextUtils
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.addTextChangedListener
+import kotlinx.coroutines.launch
 import org.caojun.chatgpt.databinding.ActivityDemoBinding
 import org.caojun.library.bean.chatgpt.CompletionReq
 import org.caojun.library.bean.chatgpt.CompletionRes
 import org.caojun.library.bean.chatgpt.Repository
+import org.caojun.library.datastore.PreferencesActivity
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class DemoActivity : AppCompatActivity() {
+class DemoActivity : PreferencesActivity() {
+
+    companion object {
+        private const val KEY_TOKEN = "KEY_TOKEN"
+    }
 
     private lateinit var binding: ActivityDemoBinding
     private val adapter = DemoAdapter(this)
@@ -34,10 +39,12 @@ class DemoActivity : AppCompatActivity() {
             checkInput()
         }
         binding.btnAsk.setOnClickListener {
-            ask()
+            doAsk()
         }
 
         binding.listView.adapter = adapter
+
+        loadDataStore(binding.etAuthToken, KEY_TOKEN)
     }
 
     private fun checkInput() {
@@ -52,12 +59,18 @@ class DemoActivity : AppCompatActivity() {
         binding.etQuestion.isEnabled = enable
     }
 
+    private fun doAsk() {
+        ask()
+    }
     private fun ask() {
         val token = binding.etAuthToken.text.toString()
         val question = binding.etQuestion.text.toString()
         if (TextUtils.isEmpty(token) || TextUtils.isEmpty(question)) {
             return
         }
+
+        saveDataStore(KEY_TOKEN, token)
+
         setButton(false)
         val api = Repository.getApi(token)
         val request = CompletionReq(question)
