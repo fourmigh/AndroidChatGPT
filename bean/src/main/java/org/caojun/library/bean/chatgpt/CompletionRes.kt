@@ -40,4 +40,6 @@ class CompletionRes {
     var error: Error? = null
 
     var question = ""
+    var askTime = 0L
+    var answerTime = 0L
 }

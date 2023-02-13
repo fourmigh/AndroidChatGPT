@@ -16,7 +16,8 @@ import java.text.SimpleDateFormat
 class DemoAdapter(private val context: Context) : BaseAdapter() {
 
     private val list = ArrayList<CompletionRes>()
-    private val sdf = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+    private val sdfAsk = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+    private val sdfAnswer = SimpleDateFormat("HH:mm:ss")
 
     override fun getCount(): Int {
         return list.size
@@ -44,7 +45,9 @@ class DemoAdapter(private val context: Context) : BaseAdapter() {
         }
         val item = getItem(position)
 
-        holder.tvTitle.hint = sdf.format(item.created * 1000)
+        val askTime = sdfAsk.format(item.askTime)
+        val answerTime = sdfAnswer.format(item.answerTime)
+        holder.tvTitle.hint = "$askTime - $answerTime (${item.answerTime - item.askTime}ms)"
         holder.tvAnswer.setText("${item.question}${item.choices[0].text}")
         holder.btnCopy.setOnClickListener {
             ClipboardUtils.copy(context, holder.tvAnswer.text.toString(), holder.tvAnswer.text.toString())
@@ -59,7 +62,9 @@ class DemoAdapter(private val context: Context) : BaseAdapter() {
         val btnCopy = root.findViewById<Button>(R.id.btnCopy)
     }
 
-    fun addData(completionRes: CompletionRes, question: String) {
+    fun addData(askTime: Long, completionRes: CompletionRes, question: String) {
+        completionRes.askTime = askTime
+        completionRes.answerTime = System.currentTimeMillis()
         completionRes.question = question
         list.add(0, completionRes)
         notifyDataSetChanged()

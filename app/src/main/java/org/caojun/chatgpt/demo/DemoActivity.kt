@@ -1,6 +1,7 @@
 package org.caojun.chatgpt.demo
 
 import android.os.Bundle
+import android.os.SystemClock
 import android.text.TextUtils
 import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
@@ -72,15 +73,16 @@ class DemoActivity : PreferencesActivity() {
         saveDataStore(KEY_TOKEN, token)
 
         setButton(false)
-        val api = Repository.getApi(token)
+        val api = Repository.getApi(token, 60)
         val request = CompletionReq(question)
+        val askTime = System.currentTimeMillis()
         api.ask(request).enqueue(object : Callback<CompletionRes> {
             override fun onResponse(call: Call<CompletionRes>, response: Response<CompletionRes>) {
                 if (response.isSuccessful) {
                     val body = response.body() ?: return
 
                     if (body.error == null) {
-                        adapter.addData(body, question)
+                        adapter.addData(askTime, body, question)
                     }
                 }
 
